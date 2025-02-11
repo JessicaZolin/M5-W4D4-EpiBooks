@@ -4,26 +4,27 @@ import CommentList from "./CommentList";
 import Loading from "./Loading";
 import ErrorMessage from "./ErrorMessage";
 
-const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzdkMDQ3YzdjMWUwYjAwMTUxNzIxYmEiLCJpYXQiOjE3Mzc5NzYxNjIsImV4cCI6MTczOTE4NTc2Mn0.d3aho08iLJMrdIKmjtIzwY37THFZkbrg6SkhOyCMylU`
 
 // The CommentArea component is a functional component that takes a single prop named asin, fetches the comments for the book with the given asin, and renders the AddComment and CommentList components.
-const CommentArea = ({ asin, /* book */ }) => {
+const CommentArea = ({ asin }) => {
 
-    const [comments, setComments] = useState([]); // comments is the state variable that holds the comments
-    const [isLoading, setIsLoading] = useState(false); // isLoading is the state variable that holds the loading state
-    const [error, setError] = useState(false); // error is the state variable that holds the error state
+
+    const token = localStorage.getItem('token');        // token takes the value of the token in the local storage that will be used to authenticate the user for API calls
+    const [comments, setComments] = useState([]);       // comments is the state variable that holds the comments
+    const [isLoading, setIsLoading] = useState(false);  // isLoading is the state variable that holds the loading state
+    const [error, setError] = useState(false);          // error is the state variable that holds the error state
     
-    /* const selectedBook = book.find((book) => book.asin === asin); */
+
     
     const handleNewComment = (newComment) => {
         setComments([...comments, newComment]);
     };
 
     useEffect(() => {
-        if (asin) {  // if asin is not null, fetch the data
-            fetchData()  // fetchData is a function that fetches the data
+        if (asin) {                                     // if asin is not null, fetch the data
+            fetchData()                                 // fetchData is a function that fetches the data
         }
-    }, [asin]// this means that the effect will be triggered only once when the component mounts});
+    }, [asin]                                           // this means that the effect will be triggered only once when the component mounts});
     )
 
     const fetchData = () => {        
@@ -36,7 +37,7 @@ const CommentArea = ({ asin, /* book */ }) => {
         })
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error(`Error in API call`);
+                    throw new Error(`Error in API call: you are not authorized! Please insert your token without the word 'Bearer' in the inputfiel above!`);
                 }
                 return response.json()
             })
@@ -65,10 +66,10 @@ const CommentArea = ({ asin, /* book */ }) => {
 
     return (
         <div className="text-center pt-4 bg-dark" style={{ marginBottom: '80px'}}>
-            {isLoading && <Loading />}                      {/* if isLoading is true, render the Loading component */}
-            {error && <ErrorMessage message={error} />}     {/* if error is true, render the ErrorMessage component */}
-            <AddComment asin={asin} newComment={handleNewComment}/>                      {/* render the AddComment component */}
-            <CommentList comments={comments} setComments={setComments}/>             {/* render the CommentList component */}
+            {isLoading && <Loading />}                                                  {/* if isLoading is true, render the Loading component */}
+            {error && <ErrorMessage message={error} />}                                 {/* if error is true, render the ErrorMessage component */}
+            <AddComment asin={asin} newComment={handleNewComment}/>                     {/* render the AddComment component */}
+            <CommentList comments={comments} setComments={setComments}/>                {/* render the CommentList component */}
         </div>
     )
 }

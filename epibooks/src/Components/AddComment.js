@@ -3,11 +3,11 @@ import { Container, Form, Button } from "react-bootstrap";
 
 
 
-const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzdkMDQ3YzdjMWUwYjAwMTUxNzIxYmEiLCJpYXQiOjE3Mzc5NzYxNjIsImV4cCI6MTczOTE4NTc2Mn0.d3aho08iLJMrdIKmjtIzwY37THFZkbrg6SkhOyCMylU`
 
 // The AddComment component takes a single prop: asin. This prop is the unique identifier of the book that the user wants to comment on. It fetches the comments for the book with the given asin and renders the AddComment and CommentList components.
 const AddComment = function ({ asin, newComment }) {
 
+    const token = localStorage.getItem("token");
     const [comments, setComments] = useState({
         comment: '',
         rate: 1,
@@ -42,8 +42,8 @@ const AddComment = function ({ asin, newComment }) {
 
 
             } else {
-                console.log("an error occurred");
-                alert("Something went wrong!");
+                console.log(`an error occurred: ${response.statusText}`); 
+                alert(`Something went wrong! ${response.statusText}`);
             }
         } catch (error) {
             console.log(error);

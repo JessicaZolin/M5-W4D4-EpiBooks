@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 
 // The SingleBook component takes a single prop named book, which is an object that represents a book in the library.
 const SingleBook = function ({ book, selected, setSelected }) {
-
+    
     return (
         // SingleBook component displays the image, title, category, price, and asin of a book that is passed as a prop (see AllTheBooks component).
 
-        <Link to={`/BookDetails/${book.asin}`} className='text-decoration-none' data-testid="book-card2">
+        
             <Card
                 className='pt-3'
                 onClick={() => setSelected(book.asin)}
@@ -34,11 +34,11 @@ const SingleBook = function ({ book, selected, setSelected }) {
                     </ListGroup>
                     <Card.Body className='d-flex justify-content-center gap-3' style={{ height: '70px' }}>
                         <Button variant="outline-success">Add to cart</Button>
-                        <Button variant="outline-danger">Details</Button>
+                        <Link to={`/BookDetails/${book.asin}`} className='text-decoration-none'><Button variant="outline-danger">Details</Button></Link>
                     </Card.Body>
                 </Container>
             </Card>
-        </Link>
+       
     );
 }
 

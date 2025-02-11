@@ -12,6 +12,7 @@ import { useState } from 'react';
 function AllTheBooks({ book, searchBook }) { 
 
   const [selected, setSelected] = useState(false);
+  
 
   const filteredBooks = book.filter((book) => {                                       // book is the array of books passed as props from App.js
     return book.title.toLowerCase().includes(searchBook.toLowerCase());               // filter the books array by title based on the searchBook value passed as props that is updated by the user input

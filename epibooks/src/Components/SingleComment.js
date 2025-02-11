@@ -2,7 +2,10 @@ import { Button } from "react-bootstrap";
 import { useState } from "react";
 
 
-const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzdkMDQ3YzdjMWUwYjAwMTUxNzIxYmEiLCJpYXQiOjE3Mzc5NzYxNjIsImV4cCI6MTczOTE4NTc2Mn0.d3aho08iLJMrdIKmjtIzwY37THFZkbrg6SkhOyCMylU`
+const token = localStorage.getItem('token');
+
+console.log(token);
+
 
 
 const SingleComment = ({ comment, onUpdate, onDelete}) => {
@@ -58,7 +61,8 @@ const SingleComment = ({ comment, onUpdate, onDelete}) => {
 
     return (
         <div className="col-12 mt-4">
-            <div key={comment._id} className="d-flex gap-2 my-3 mx-3 align-items-center">
+            <div key={comment._id} className="d-flex gap-2 my-3 mx-3 align-items-center"
+            data-testid="single-comment">
                 {isEditing ? (                                                                  // if the user clicks on the modify button, the comment is displayed in an input field that the user can modify
                     <>
                         <input

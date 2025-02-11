@@ -3,6 +3,8 @@ import { Card, Container, Button } from 'react-bootstrap';
 import CommentArea from "./CommentArea";
 
 const BookDetails = (book) => {
+
+    
     const params = useParams()
     const selectedBook = book.book.find(book => book.asin === params.asin)
     return (

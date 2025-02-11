@@ -23,16 +23,19 @@ function App() {
   const [searchBook, setSearchBook] = useState('');
   console.log('The value of the searchBook variable is: ', searchBook);
 
+  const [token, setToken] = useState('');
+  localStorage.setItem('token', token);
+
   return (
     <BrowserRouter>
       <div className="bg-dark text-white">
 
-        <MyNav Brand="BOOKS ON A TREE" searchBook={searchBook} onchange={(event) => setSearchBook(event.target.value)} />
+        <MyNav Brand="BOOKS ON A TREE" searchBook={searchBook} onchange={(event) => setSearchBook(event.target.value)} token={token} setToken={(event) => setToken(event.target.value)}/>
         <Welcome />
         <main style={{ minHeight: '80vh' }}>
           <Routes>
-            <Route path="/" element={<AllTheBooks book={books} searchBook={searchBook} />} />
-            <Route path="/BookDetails/:asin" element={<BookDetails book={books} />} />
+            <Route path="/" element={<AllTheBooks book={books} searchBook={searchBook} token={token}/>} />
+            <Route path="/BookDetails/:asin" element={<BookDetails book={books} token={token}/>} />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/404" />} />
           </Routes>

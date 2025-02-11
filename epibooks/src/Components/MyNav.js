@@ -2,7 +2,7 @@ import { Nav, Navbar, NavDropdown, Row, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 
-function MyNav({Brand, searchBook, onchange}) {
+function MyNav({ Brand, searchBook, onchange, token, setToken }) {
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary position-sticky top-0 z-3">
@@ -27,7 +27,21 @@ function MyNav({Brand, searchBook, onchange}) {
           </Nav>
         </Navbar.Collapse>
 
-   {/* // The search bar that allows the user to search for a book and update its value. */}
+        {/* // the input field that allows the user to insert his token */}
+        <Row className=' d-flex justify-content-center align-items-center m-auto'>
+          <Form>
+            <Form.Group className='d-flex align-items-center justify-content-center gap-2'>
+              <Form.Label className='text-black m-0'>Token:</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Insert your token"
+                value={token}
+                onChange={setToken} />
+            </Form.Group>
+          </Form>
+        </Row>
+
+        {/* // The search bar that allows the user to search for a book and update its value. */}
         <Row className=' d-flex justify-content-center align-items-center m-auto'>
           <Form>
             <Form.Group>
